@@ -10,8 +10,7 @@ $(document).ready(function() {
     //var pageWidth = $(window).width() || 1000;
     var pageWidth = document.documentElement.clientWidth || window.innerWidth || window.document.documentElement.clientWidth || window.outerWidth;
     console.log(" width =  " + pageWidth);
-    
-	var pageHeight = 1500;
+	var pageHeight = 1200;
 
     init();
 
@@ -23,7 +22,10 @@ $(document).ready(function() {
     }
 
     function setBody() {
-    	var width_global = Number($('#container_global').css("width").replace("px", ""));
+    	//var width_global = Number($('#container_global').css("width").replace("px", ""));
+    	var width_global = pageWidth - 200;
+    	$('#container_global').css("width", width_global + "px");
+    	
     	
       	var pages = document.getElementsByClassName("container_each");      	
     	var width_each = width_global;
@@ -37,12 +39,14 @@ $(document).ready(function() {
 			left : pos_x_each + "px",
 		});
 		
+		/*
     	var width_contents = width_global - 30;
     	var height_contents = pageHeight - 300;
 		$(".contents").css({
 			width : width_contents - 10 + "px",
 			height : height_contents - 150 + "px"
 		});
+		*/
 
 		/* Workの編集 */
 		var work_imgs = $(".work_image");
@@ -61,6 +65,10 @@ $(document).ready(function() {
 			pos_y_each = pageHeight * i;
 			pages[i].style.top = pos_y_each + "px";
 		}
+		
+		var imgs = document.getElementById("bg3");
+		var h = imgs.getAttribute("height");
+		console.log("画像の高さは  " + h + "  です");
     }
 
     function resizeWindow() {
@@ -119,31 +127,43 @@ $(document).ready(function() {
     }
     
    	var fade1 = false;    
-   	var fade2 = false;    
+   	var fade2 = false;
+   	var fade3 = false;
     window.onscroll = function() {
     	var scroll = document.body.scrollTop || document.documentElement.scrollTop;
     	var rate;
     	
-    	if ((scroll > 1200) && !fade1) {
+    	if ((scroll > 1000) && !fade1) {
 	    	console.log("scroll = " + scroll + "  rate :  " + rate);
 	    	fade1 = true;
 			$("#bg1").fadeTo(1000, 0.0, function() { console.log("ok");}) ;    		
     	}
-    	else if ((scroll < 1200) && fade1) {
+    	else if ((scroll < 1000) && fade1) {
 	    	console.log("scroll = " + scroll + "  rate :  " + rate);
 	    	fade1 = false;
 			$("#bg1").fadeTo(1000, 1.0, function() { console.log("ok");}) ;    		
     	}
     	
-    	if ((scroll > 2700) && !fade2) {
+    	if ((scroll > 2200) && !fade2) {
 	    	console.log("scroll = " + scroll + "  rate :  " + rate);
 	    	fade2 = true;
 			$("#bg2").fadeTo(1000, 0.0, function() { console.log("ok");}) ;    		    		
     	}
-		else if ((scroll < 2700) && fade2) {
+		else if ((scroll < 2200) && fade2) {
 	    	console.log("scroll = " + scroll + "  rate :  " + rate);
 	    	fade2 = false;
 			$("#bg2").fadeTo(1000, 1.0, function() { console.log("ok");}) ;    		
+    	}
+    	
+    	if ((scroll > 3400) && !fade3) {
+	    	console.log("scroll = " + scroll + "  rate :  " + rate);
+	    	fade3 = true;
+			$("#bg3").fadeTo(1000, 0.0, function() { console.log("ok");}) ;    		    		
+    	}
+		else if ((scroll < 3400) && fade3) {
+	    	console.log("scroll = " + scroll + "  rate :  " + rate);
+	    	fade3 = false;
+			$("#bg3").fadeTo(1000, 1.0, function() { console.log("ok");}) ;    		
     	}
 
     }
